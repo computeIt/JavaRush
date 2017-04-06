@@ -35,7 +35,7 @@ public class Solution {
                 DoubleString service = (DoubleString)registry.lookup(UNIC_BINDING_NAME);
                 String res = service.doubleString("test string ");
                 System.out.println(res);
-            }catch(RemoteException e){
+            }catch(RemoteException e){ 
                 e.printStackTrace();
             }catch(NotBoundException e){
                 e.printStackTrace();
