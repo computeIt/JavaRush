@@ -10,8 +10,8 @@ public class Zoo {
     public List<Animal> animals = new ArrayList<>();
 
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-    @JsonSubTypes({@JsonSubTypes.Type(value = Dog.class, name = "dog"),
-                    @JsonSubTypes.Type(value = Cat.class, name = "cat")})
+    @JsonSubTypes({@JsonSubTypes.Type(value = Dog.class, name = "dog"),//даем классам "имена" - как они будут выглядеть после сериализации в json
+                   @JsonSubTypes.Type(value = Cat.class, name = "cat")})
     public static class Animal {
         public Animal(String name) {
             this.name = name;
@@ -19,9 +19,8 @@ public class Zoo {
 
         public String name;
     }
-    @JsonTypeName("dog")
+    @JsonTypeName("dog")//с помощью аннотации показываем имя класса для десериализации
     public static class Dog extends Animal {
-
         public double barkVolume;
 
         public Dog(String name) {
