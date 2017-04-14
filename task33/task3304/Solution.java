@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
-//
+
 //Конвертация из одного класса в другой используя JSON
 //        НЕОБХОДИМО: подключенные библиотеки Jackson Core, Bind и Annotation версии 2.6.1
 //
@@ -18,7 +18,6 @@ import java.io.StringWriter;
 //        Известно, что у классов есть JSON аннотация, у которой значение property равно имени класса в нижнем регистре.
 //        На примере класса First, это className=»first»
 //        Классы First и Second не участвуют в тестировании, они предоставлены в качестве тестовых данных.
-//
 //
 //        Требования:
 //        1. Метод convertOneToAnother должен возвращать объект класса resultClassObject значения полей которого равны
@@ -48,10 +47,10 @@ public class Solution {
         String oneClassName = one.getClass().getSimpleName().toLowerCase();
         String resClassName = resultClassObject.getSimpleName().toLowerCase();
         String jsonString = writer.toString().replaceFirst(oneClassName, resClassName);
-        /*после этой строки кода наша json строка стала выглядеть так
+        /*после этой строки кода наша json-строка стала выглядеть так
         {"className":"second","i":100,"name":"any string as a name"}
-        мы подменили имя класса и в 57строке указываем, какой класс нам нужен в результате а именно - resultClassObject
-        данный класс совпадает с тем, который идет в самой строке, поэтому после десериализации мы получим объект класса Second*/
+        мы подменили имя класса и в 56й строке указываем, какой класс нам нужен в результате а именно - resultClassObject
+        данный класс совпадает с тем, который указан в самой json-строке, поэтому после десериализации мы получим объект класса Second*/
 
         StringReader sReader = new StringReader(jsonString);
         Object result = om.readValue(sReader, resultClassObject);
@@ -59,7 +58,7 @@ public class Solution {
     }
 
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME,  property="className")/*тут мы задаем имя, которое будет фигурировать 
-    перед именем класса в json строке после сериализации - см строку 44*/
+    перед именем класса в json строке после сериализации - см строку 43*/
     @JsonSubTypes(@JsonSubTypes.Type(value=First.class,  name="first"))/*это - изменение видимого имени класса*/
     public static class First {
         public int i;
