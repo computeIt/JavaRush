@@ -60,6 +60,6 @@ text 1
     }
 
     public static Map getExpectedMap() {
-        return new HashMap();
+        return new HashMap();               //hashmap допускает использование null в качестве ключа
     }
 }
