@@ -14,7 +14,8 @@ public class RedShapeDecorator extends ShapeDecorator {
     private void setBorderColor(Shape shape){
         System.out.println("Setting border color for " + shape.getClass().getSimpleName() + " to red.");
     }
-
+//паттерн декоратор
+//класс RedShapeDecorator в пакете Decorators расширяет функциональность объектов типа Shape не меняя их структуру
     @Override
     public void draw() {
         setBorderColor(this.decoratedShape);
