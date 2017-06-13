@@ -49,7 +49,7 @@ public class LogParser implements IPQuery {
 
     public List<Object> parseString(String string) {
         List<Object> result = new ArrayList<>();
-        String[] array = string.split("\\t");
+        String[] array = string.split("\\s");
         //split a string by a space or a tabulation
         String ip = array[0];
         String name = "";
@@ -103,6 +103,8 @@ public class LogParser implements IPQuery {
         if(after == null && (date.getTime() <= before.getTime()))
             return true;
         if(before == null && (date.getTime() >= after.getTime()))
+            return true;
+        if(date.getTime() >= after.getTime() && date.getTime() <= before.getTime())
             return true;
         return false;
     }
