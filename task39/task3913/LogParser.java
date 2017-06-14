@@ -150,7 +150,7 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
     @Override
     public int getNumberOfUsers(Date after, Date before) {
         Set<String> users = new HashSet<>();
-        
+
         for(Record record : setOfLogObjects){
             if(isDateFromInterval(record.getDate(), after, before))
                 users.add(record.getUserName());
@@ -423,7 +423,7 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
         Set<Event> result = new HashSet<>();
         for(Record record : setOfLogObjects){
             if(isDateFromInterval(record.getDate(), after, before)
-                && record.getStatus().equals(Status.FAILED))
+                    && record.getStatus().equals(Status.FAILED))
                 result.add(record.getEvent());
         }
         return result;
@@ -531,7 +531,7 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
         return result;
     }
 
-//ip, user, date, event или status
+    //ip, user, date, event или status
     private Set<Object> complicateQuery(String[] array) {
         Set<Object> result = new HashSet<>();
 
@@ -626,7 +626,7 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
                             result.add(record.getStatus());
                     }
                 }
-        }
+            }
         } catch (ParseException e) {
             e.printStackTrace();
             //wrong date
@@ -697,8 +697,8 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
         String field1 = array[1];
         String fieldFor = array[2];
         String field2 = array[3];
-        array = query.split("[\"«]");
-        String value1 = array[1].substring(0, array[1].indexOf("[\"»]"));
+        array = query.split("=");
+        String value1 = array[1].split("\"")[1];
         array = new String[5];
         array[0] = fieldGet;
         array[1] = field1;
@@ -707,6 +707,7 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
         array[4] = value1;
         return array;
     }
+
 
     public Set<Status> getUniqueStatuses(Date after, Date before) {
         Set<Status> result = new HashSet<>();
