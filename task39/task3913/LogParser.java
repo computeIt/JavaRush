@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+
 public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQuery {
     private Set<Record> setOfLogObjects;
 
@@ -508,25 +509,28 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
         String field2 = array[3];
         String value1 = array[4];
 
-        switch (query){
-            case "get ip":
-                result.addAll(getUniqueIPs(null, null));
-                break;
-            case "get user":
-                result.addAll(getAllUsers());
-                break;
-            case "get date":
-                result.addAll(getUniqueDates(null, null));
-                break;
-            case "get event":
-                result.addAll(getAllEvents(null, null));
-                break;
-            case "get status":
-                result.addAll(getUniqueStatuses(null, null));
-                break;
-            default:
-                result = complicateQuery(array); //case "get field1 for field2 = value1"
-                break;
+        if(query.split(" ").length == 2) {
+            switch (query) {
+                case "get ip":
+                    result.addAll(getUniqueIPs(null, null));
+                    break;
+                case "get user":
+                    result.addAll(getAllUsers());
+                    break;
+                case "get date":
+                    result.addAll(getUniqueDates(null, null));
+                    break;
+                case "get event":
+                    result.addAll(getAllEvents(null, null));
+                    break;
+                case "get status":
+                    result.addAll(getUniqueStatuses(null, null));
+                    break;
+                default:
+                    break;
+            }
+        }else{
+            result = complicateQuery(array); //case "get field1 for field2 = value1"
         }
         return result;
     }
@@ -535,8 +539,8 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
     private Set<Object> complicateQuery(String[] array) {
         Set<Object> result = new HashSet<>();
 
-        if(!array[0].equals("get") || !array[2].equals("for"))
-            return null;
+//        if(!array[0].equals("get") || !array[2].equals("for"))
+//            return null;
 
         String field1 = array[1];
         String field2 = array[3];
@@ -659,7 +663,6 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
                 }
             }
         }
-
         //get field1 for status = ""
         if(field2.equals("status")){
             if(field1.equals("user")){
