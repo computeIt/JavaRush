@@ -33,6 +33,21 @@ public class Solution {
     }
 
     public static void main(String[] args) {
+        long t1 = System.currentTimeMillis();
+        String s1 = ExceptionApplicationMessage.SOCKET_IS_CLOSED.toString();
+        long t2 = System.currentTimeMillis();
+        String s2 = ExceptionApplicationMessage.SOCKET_IS_CLOSED.name();
+        long t3 = System.currentTimeMillis();
+        System.out.println("time of using toString() -> " + (t2-t1));
+        System.out.println("time of using name() -> " + (t3-t2));
 
+        //разница между использованием метода name() и toString() для enum неочевидна
+        // засечка времени показывает незначительную разницу(у меня получилось соответственно 0 и 3мс),
+        // что неудивительно, если взглянуть на реализацию toString() для enum
+        //        public String toString() {
+        //            return name;
+        //        }
+        //форумы и javadoc глаголят, что единственная разница в том, что toString() можно перегрузить(Override) 
+        // и заставить возвращать что угодно, а name() в данной ситуации - непоколебимый столб 
     }
 }
