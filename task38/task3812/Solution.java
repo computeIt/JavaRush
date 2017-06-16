@@ -29,9 +29,9 @@ public class Solution {
     }
 
     public static boolean printFullyQualifiedNames(Class c) {
-        if(c.isAnnotationPresent(PrepareMyTest.class)){
-            PrepareMyTest prepareMyTest = (PrepareMyTest) c.getAnnotation(PrepareMyTest.class);
-            for(String str : prepareMyTest.fullyQualifiedNames())
+        if(c.isAnnotationPresent(PrepareMyTest.class)){             //проверяем класс на наличие нужной нам аннотации
+            PrepareMyTest prepareMyTest = (PrepareMyTest) c.getAnnotation(PrepareMyTest.class);//если она присутствует, с ее помощью создаем объект
+            for(String str : prepareMyTest.fullyQualifiedNames())   //из которого вытаскиваем нужное нам поле
                 System.out.println(str);
             return true;
         }
