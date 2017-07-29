@@ -1,9 +1,8 @@
-//работает но валидатор не принимает :(
 package com.javarush.task.task40.task4007;
 
 import java.util.Calendar;
 
-/* 
+/*
 Работа с датами
 Реализуй метод printDate(String date).
 Он должен в качестве параметра принимать дату (в одном из 3х форматов)
@@ -104,7 +103,7 @@ public class Solution {
             cal.set(Integer.parseInt(dateArr[2]), Integer.parseInt(dateArr[1])-1, Integer.parseInt(dateArr[0]),
                     Integer.parseInt(timeArr[0]), Integer.parseInt(timeArr[1]), Integer.parseInt(timeArr[2]));
             System.out.println("День: " + cal.get(Calendar.DAY_OF_MONTH));
-            System.out.println("День недели: " + (cal.get(Calendar.DAY_OF_WEEK)-1));
+            System.out.println("День недели: " + ((cal.get(Calendar.DAY_OF_WEEK) - 1) == 0 ? 7 : cal.get(Calendar.DAY_OF_WEEK) - 1));
             System.out.println("День месяца: " + cal.get(Calendar.DAY_OF_MONTH));
             System.out.println("День года: " + cal.get(Calendar.DAY_OF_YEAR));
             System.out.println("Неделя месяца: " + cal.get(Calendar.WEEK_OF_MONTH));
@@ -120,7 +119,7 @@ public class Solution {
         else if(dateFlag == true && timeFlag == false){
             cal.set(Integer.parseInt(dateArr[2]), Integer.parseInt(dateArr[1])-1, Integer.parseInt(dateArr[0]));
             System.out.println("День: " + cal.get(Calendar.DAY_OF_MONTH));
-            System.out.println("День недели: " + (cal.get(Calendar.DAY_OF_WEEK)-1));
+            System.out.println("День недели: " + ((cal.get(Calendar.DAY_OF_WEEK) - 1) == 0 ? 7 : cal.get(Calendar.DAY_OF_WEEK) - 1));
             System.out.println("День месяца: " + cal.get(Calendar.DAY_OF_MONTH));
             System.out.println("День года: " + cal.get(Calendar.DAY_OF_YEAR));
             System.out.println("Неделя месяца: " + cal.get(Calendar.WEEK_OF_MONTH));
@@ -130,6 +129,7 @@ public class Solution {
         }
         else if(dateFlag == false && timeFlag == true){
             cal.set(0,0,0, Integer.parseInt(timeArr[0]), Integer.parseInt(timeArr[1]), Integer.parseInt(timeArr[2]));
+            System.out.println("AM или PM: " + (cal.get(Calendar.AM_PM) == 0 ? "AM" : "PM"));
             System.out.println("Часы: " + cal.get(Calendar.HOUR));
             System.out.println("Часы дня: " + cal.get(Calendar.HOUR_OF_DAY));
             System.out.println("Минуты: " + cal.get(Calendar.MINUTE));
