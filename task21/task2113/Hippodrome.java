@@ -1,6 +1,8 @@
 package com.javarush.task.task21.task2113;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -40,6 +42,21 @@ public class Hippodrome {
         }
     }
 
+    public Horse getWinner(){
+        List<Horse> temp = getHorses();
+        Horse res = temp.get(0);
+        for(Horse h : temp){
+            if(Double.compare(h.getDistance(), res.getDistance()) > 0){
+                res = h;
+            }
+        }
+        return res;
+    }
+
+    public void printWinner(){
+        System.out.println("Winner is " + getWinner().getName() + "!");
+    }
+
 
 
     public static void main(String[] args) throws InterruptedException {
@@ -52,5 +69,6 @@ public class Hippodrome {
         horses.add(horse3);
         Hippodrome.game = new Hippodrome(horses);
         game.run();
+        game.printWinner();
     }
 }
